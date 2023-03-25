@@ -35,8 +35,8 @@ const MyAccount = () => {
         const api=`http://localhost:5000/user/myProfile/${id}`;
         
         let ppdata=await Axios.get(api);
-        setUData(ppdata.data)
-        console.log (ppdata.data)
+        setUData(ppdata.data[0])
+        console.log (ppdata.data[0])
     } catch (error) {
         console.log(error)
     }

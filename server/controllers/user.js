@@ -18,8 +18,8 @@ const ProfileScahema = mongoose.Schema({
   id: String,
   bname:String,
   address: String,
-  eyear: Number,
-  clist: Number,
+  eyear: String|Number,
+  clist: String |Number,
   nproduct: String,
   file: String,
   createdAt: {
@@ -47,20 +47,20 @@ export const createP=async(req,res)=>{
     // console.log(req.body)
     
     const { id } = req.params;
-    console.log(id,"id")
+    // console.log(id,"id")
     const data = req.body;
+    for (let key in data) {
+      if (data[key] == "") {
+        delete data[key];
+      }
+    }
     // console.log(id,data)
    try{
-    const updateData = await Profile.findByIdAndUpdate(
-      id,
-      {
-        bname:data.bname,
-        address: data.address,
-        eyear: data.eyear,
-        clist: data.clist,
-        nproduct: data.nproduct,
-        file: data.file,
-      },
+    const updateData = await Profile.findOneAndUpdate(
+      {id:id},
+      
+        data
+      ,
       { new: true }
     );   
      res.status(201).json(updateData);
@@ -80,9 +80,9 @@ export const createP=async(req,res)=>{
 export const getP=async(req,res)=>{
   const { id } = req.params;
   try{
-    // console.log("Profile")
+    // console.log(id,"Profile")
       const gProfile=await Profile.find({id});
-      console.log(gProfile)
+      // console.log(gProfile)
        res.status(200).json(gProfile)
   }
   catch(e){

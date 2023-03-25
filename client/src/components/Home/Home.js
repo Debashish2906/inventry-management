@@ -9,7 +9,7 @@ const Home = () => {
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
   // const classes = useStyles();
-
+  // https://github.com/Debashish2906/inventry-management
   useEffect(() => {
     // dispatch(getLaundry());
     // console.log()
